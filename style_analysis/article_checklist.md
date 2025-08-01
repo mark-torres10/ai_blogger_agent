@@ -3,12 +3,12 @@
 ## Research Section (18 articles)
 - [x] **The surprising effectiveness of SQLite for non-persistent use cases.** (2025-01-30) - ✅ COMPLETED
 - [x] **Why do we teach developers that serverless is always better?** (2025-01-21) - ✅ COMPLETED
-- [ ] Research updates, 2024-06-01 (2024-06-01)
-- [ ] Research updates, 2024-05-31 (2024-05-31)
-- [ ] Research updates, 2024-05-30 (2024-05-30)
+- [x] **Research updates, 2024-06-01** (2024-06-01) - ✅ COMPLETED
+- [x] **Research updates, 2024-05-31** (2024-05-31) - ✅ COMPLETED
+- [x] **Research updates, 2024-05-30** (2024-05-30) - ✅ COMPLETED
 - [x] **Accidentally deleting prod data (and the importance of backups)** (2024-05-28) - ✅ COMPLETED
-- [ ] Experiments with LLM classification for political content (Part IX) (2024-05-21)
-- [ ] Experiments with LLM classification for political content (Part VIII) (2024-05-21)
+- [x] **Experiments with LLM classification for political content (Part IX)** (2024-05-21) - ✅ COMPLETED
+- [x] **Experiments with LLM classification for political content (Part VIII)** (2024-05-21) - ✅ COMPLETED
 - [ ] Experiments with LLM classification for political content (Part VII) (2024-05-18)
 - [ ] Experiments with LLM classification for political content (Part VI) (2024-05-08)
 - [ ] Experiments with LLM classification for political content (Part V) (2024-05-08)
@@ -31,10 +31,10 @@
 - [x] **What I'm learning (2024-05-09)** (2024-05-09) - ✅ COMPLETED
 
 ## Personal Section (10 articles)
-- [ ] If you're going to do something, you might as well do it well (2025-01-21)
+- [x] **If you're going to do something, you might as well do it well** (2025-01-21) - ✅ COMPLETED
 - [ ] Setting up zsh on an HPC environment (2025-01-14)
-- [ ] Knowing how to code isn't enough to keep you employed in tech (2024-06-23)
-- [ ] You don't have to be the best at what you do. You just have to be good at fixing people's problems. (2024-06-11)
+- [x] **Knowing how to code isn't enough to keep you employed in tech** (2024-06-23) - ✅ COMPLETED
+- [x] **You don't have to be the best at what you do. You just have to be good at fixing people's problems.** (2024-06-11) - ✅ COMPLETED
 - [ ] Money won't open your textbooks or lift your weights. (2024-06-02)
 - [ ] Brief thoughts on outsourced labor (2024-05-17)
 - [ ] Why I'm not too worried about AI taking over the world (2024-05-17)
@@ -44,8 +44,8 @@
 
 ## Summary
 - **Total Articles:** 36
-- **Completed:** 8 (22.2%)
-- **Remaining:** 28 (77.8%)
+- **Completed:** 13 (36.1%)
+- **Remaining:** 23 (63.9%)
 
 ## Priority Articles for Analysis
 Based on content richness and style diversity, these articles should be prioritized:
