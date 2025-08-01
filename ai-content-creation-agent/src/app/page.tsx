@@ -55,8 +55,7 @@ export default function Home() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          topic: selectedTopic,
-          customTopic: topic !== selectedTopic ? topic : undefined,
+          topic: topic,
         }),
       });
 
@@ -152,7 +151,7 @@ export default function Home() {
                   placeholder="Or enter any topic you'd like to write about..."
                   className="flex-1"
                   disabled={isLoading}
-                  onKeyPress={(e) => e.key === 'Enter' && handleCustomTopicSubmit()}
+                  onKeyDown={(e) => e.key === 'Enter' && handleCustomTopicSubmit()}
                 />
                 <Button 
                   onClick={handleCustomTopicSubmit}
@@ -257,7 +256,7 @@ export default function Home() {
         {/* Footer */}
         <div className="text-center mt-12 pt-8 border-t border-slate-200">
           <p className="text-sm text-slate-500">
-            Powered by OpenAI GPT-4 • Style analysis by Mark Torres
+            Powered by OpenAI GPT-4o-mini • Style analysis by Mark Torres
           </p>
         </div>
       </div>
