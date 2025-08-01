@@ -9,16 +9,16 @@
 - [x] **Accidentally deleting prod data (and the importance of backups)** (2024-05-28) - ✅ COMPLETED
 - [x] **Experiments with LLM classification for political content (Part IX)** (2024-05-21) - ✅ COMPLETED
 - [x] **Experiments with LLM classification for political content (Part VIII)** (2024-05-21) - ✅ COMPLETED
-- [ ] Experiments with LLM classification for political content (Part VII) (2024-05-18)
+- [x] **Experiments with LLM classification for political content (Part VII)** (2024-05-18) - ✅ COMPLETED
 - [x] **Experiments with LLM classification for political content (Part VI)** (2024-05-08) - ✅ COMPLETED
 - [x] **Experiments with LLM classification for political content (Part V)** (2024-05-08) - ✅ COMPLETED
 - [x] **Experiments with LLM classification for political content (Part IV)** (2024-05-03) - ✅ COMPLETED
 - [x] **Experiments with LLM classification for political content (Part III)** (2024-05-02) - ✅ COMPLETED
 - [x] **Experiments with LLM classification for political content (Part II)** (2024-05-01) - ✅ COMPLETED
 - [x] **Experiments with LLM classification for political content (Part I)** (2024-04-30) - ✅ COMPLETED
-- [ ] Summary of "Algorithm-mediated social learning in online social networks" (2023-12-08)
+- [x] **Summary of "Algorithm-mediated social learning in online social networks"** (2023-12-08) - ✅ COMPLETED
 - [x] **Creating custom feeds in Bluesky: a data scientist's experience** (2023-11-29) - ✅ COMPLETED
-- [ ] Working with Bluesky as a researcher (2023-11-28)
+- [x] **Working with Bluesky as a researcher** (2023-11-28) - ✅ COMPLETED
 
 ## Self Education Section (8 articles)
 - [ ] What I'm learning (2024-05-20) (2024-05-20)
@@ -44,8 +44,8 @@
 
 ## Summary
 - **Total Articles:** 36
-- **Completed:** 18 (50.0%)
-- **Remaining:** 18 (50.0%)
+- **Completed:** 21 (58.3%)
+- **Remaining:** 15 (41.7%)
 
 ## Priority Articles for Analysis
 Based on content richness and style diversity, these articles should be prioritized:
