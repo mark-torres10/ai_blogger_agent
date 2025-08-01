@@ -1,13 +1,17 @@
 'use client';
 
 import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Badge } from '@/components/ui/badge';
 
 // Default topics for the 4 buttons
 const DEFAULT_TOPICS = [
-  'Personal Growth and Learning',
-  'Technology and Engineering',
-  'Career Development',
-  'Life Philosophy and Wisdom'
+  'Personal Growth',
+  'Technology',
+  'Career',
+  'Philosophy'
 ];
 
 interface GeneratedContent {
@@ -23,8 +27,6 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
   const [copySuccess, setCopySuccess] = useState<boolean>(false);
-
-
 
   const handleCustomTopicSubmit = async () => {
     if (!customTopic.trim()) {
@@ -87,142 +89,174 @@ export default function Home() {
   const getContentTypeColor = (contentType: string) => {
     switch (contentType) {
       case 'personal':
-        return 'bg-blue-100 text-blue-800';
+        return 'bg-blue-50 text-blue-700 border-blue-200';
       case 'technical':
-        return 'bg-green-100 text-green-800';
+        return 'bg-green-50 text-green-700 border-green-200';
       case 'educational':
-        return 'bg-purple-100 text-purple-800';
+        return 'bg-purple-50 text-purple-700 border-purple-200';
       default:
-        return 'bg-gray-100 text-gray-800';
+        return 'bg-gray-50 text-gray-700 border-gray-200';
     }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-8 px-4">
-      <div className="max-w-4xl mx-auto">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
+      <div className="container mx-auto px-4 py-8 max-w-4xl">
         {/* Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-800 mb-4">
+        <div className="text-center mb-12">
+          <h1 className="text-4xl font-bold text-slate-900 mb-3">
             AI Content Creation Agent
           </h1>
-          <p className="text-xl text-gray-600">
-            Generate blog content in Mark Torres&apos;s authentic voice
+          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+            Generate blog content in Mark Torres&apos;s authentic voice using advanced AI and comprehensive style analysis
           </p>
         </div>
 
-        {/* Default Topic Buttons */}
-        <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
-          <h2 className="text-2xl font-semibold text-gray-700 mb-4">
-            Choose a Topic
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {DEFAULT_TOPICS.map((topic) => (
-              <button
-                key={topic}
-                onClick={() => handleDefaultTopicClick(topic)}
-                disabled={isLoading}
-                className={`p-4 rounded-lg border-2 transition-all duration-200 ${
-                  selectedTopic === topic
-                    ? 'border-blue-500 bg-blue-50 text-blue-700'
-                    : 'border-gray-200 hover:border-blue-300 hover:bg-blue-50'
-                } ${isLoading ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
-              >
-                <div className="font-medium">{topic}</div>
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Custom Topic Input */}
-        <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
-          <h2 className="text-2xl font-semibold text-gray-700 mb-4">
-            Or Enter Your Own Topic
-          </h2>
-          <div className="flex gap-4">
-            <input
-              type="text"
-              value={customTopic}
-              onChange={(e) => setCustomTopic(e.target.value)}
-              placeholder="Enter any topic you'd like to write about..."
-              className="flex-1 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              disabled={isLoading}
-            />
-            <button
-              onClick={handleCustomTopicSubmit}
-              disabled={isLoading || !customTopic.trim()}
-              className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              Generate
-            </button>
-          </div>
-        </div>
-
-        {/* Error Display */}
-        {error && (
-          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg mb-6">
-            <strong>Error:</strong> {error}
-          </div>
-        )}
-
-        {/* Loading State */}
-        {isLoading && (
-          <div className="bg-white rounded-lg shadow-lg p-8 mb-6 text-center">
-            <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mb-4"></div>
-            <p className="text-gray-600">Generating content in Mark&apos;s voice...</p>
-          </div>
-        )}
-
-        {/* Generated Content Display */}
-        {generatedContent && (
-          <div className="bg-white rounded-lg shadow-lg p-6">
-            <div className="flex justify-between items-start mb-4">
-              <div>
-                <h2 className="text-2xl font-semibold text-gray-700 mb-2">
-                  Generated Content
-                </h2>
-                <div className="flex items-center gap-4">
-                  <span className="text-sm text-gray-500">
-                    Topic: <span className="font-medium">{generatedContent.topic}</span>
-                  </span>
-                  <span className={`px-2 py-1 rounded-full text-xs font-medium ${getContentTypeColor(generatedContent.contentType)}`}>
-                    {generatedContent.contentType}
-                  </span>
-                </div>
-              </div>
-              <button
-                onClick={copyToClipboard}
-                className={`px-4 py-2 rounded-lg transition-colors ${
-                  copySuccess
-                    ? 'bg-green-600 text-white'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                }`}
-              >
-                {copySuccess ? 'Copied!' : 'Copy'}
-              </button>
-            </div>
-            
-            <div className="prose prose-lg max-w-none">
-              <div className="bg-gray-50 rounded-lg p-6 border-l-4 border-blue-500">
-                {generatedContent.content.split('\n\n').map((paragraph, index) => (
-                  <p key={index} className="mb-4 last:mb-0 text-gray-800 leading-relaxed">
-                    {paragraph}
-                  </p>
+        {/* Main Content Area */}
+        <div className="space-y-6">
+          {/* Topic Selection Card */}
+          <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
+            <CardHeader>
+              <CardTitle className="text-xl text-slate-800">Choose a Topic</CardTitle>
+              <CardDescription>
+                Select from popular topics or enter your own
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              {/* Default Topic Buttons - Single Row */}
+              <div className="flex flex-wrap gap-3">
+                {DEFAULT_TOPICS.map((topic) => (
+                  <Button
+                    key={topic}
+                    variant={selectedTopic === topic ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => handleDefaultTopicClick(topic)}
+                    disabled={isLoading}
+                    className={`transition-all duration-200 ${
+                      selectedTopic === topic 
+                        ? 'bg-blue-600 hover:bg-blue-700' 
+                        : 'hover:bg-slate-50 border-slate-200'
+                    }`}
+                  >
+                    {topic}
+                  </Button>
                 ))}
               </div>
-            </div>
 
-            <div className="mt-6 pt-4 border-t border-gray-200">
-              <p className="text-sm text-gray-500">
-                This content was generated using Mark&apos;s personalized writing style guide, 
-                incorporating authentic vulnerability, educational generosity, and cultural awareness.
-              </p>
-            </div>
-          </div>
-        )}
+              {/* Custom Topic Input */}
+              <div className="flex gap-3 pt-2">
+                <Input
+                  type="text"
+                  value={customTopic}
+                  onChange={(e) => setCustomTopic(e.target.value)}
+                  placeholder="Or enter any topic you'd like to write about..."
+                  className="flex-1"
+                  disabled={isLoading}
+                  onKeyPress={(e) => e.key === 'Enter' && handleCustomTopicSubmit()}
+                />
+                <Button 
+                  onClick={handleCustomTopicSubmit}
+                  disabled={isLoading || !customTopic.trim()}
+                  size="sm"
+                >
+                  Generate
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Error Display */}
+          {error && (
+            <Card className="border-red-200 bg-red-50">
+              <CardContent className="pt-6">
+                <div className="flex items-center gap-2 text-red-700">
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+                  </svg>
+                  <span className="font-medium">Error:</span>
+                  <span>{error}</span>
+                </div>
+              </CardContent>
+            </Card>
+          )}
+
+          {/* Loading State */}
+          {isLoading && (
+            <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
+              <CardContent className="pt-8 pb-8 text-center">
+                <div className="inline-flex items-center gap-3">
+                  <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-600"></div>
+                  <span className="text-slate-600">Generating content in Mark&apos;s voice...</span>
+                </div>
+              </CardContent>
+            </Card>
+          )}
+
+          {/* Generated Content Display */}
+          {generatedContent && (
+            <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
+              <CardHeader>
+                <div className="flex justify-between items-start">
+                  <div>
+                    <CardTitle className="text-xl text-slate-800 mb-2">
+                      Generated Content
+                    </CardTitle>
+                    <div className="flex items-center gap-3">
+                      <span className="text-sm text-slate-500">
+                        Topic: <span className="font-medium text-slate-700">{generatedContent.topic}</span>
+                      </span>
+                      <Badge variant="outline" className={getContentTypeColor(generatedContent.contentType)}>
+                        {generatedContent.contentType}
+                      </Badge>
+                    </div>
+                  </div>
+                  <Button
+                    onClick={copyToClipboard}
+                    variant={copySuccess ? "default" : "outline"}
+                    size="sm"
+                    className={copySuccess ? "bg-green-600 hover:bg-green-700" : ""}
+                  >
+                    {copySuccess ? (
+                      <>
+                        <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                        Copied!
+                      </>
+                    ) : (
+                      <>
+                        <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                        Copy
+                      </>
+                    )}
+                  </Button>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <div className="bg-slate-50 rounded-lg p-6 border-l-4 border-blue-500">
+                  {generatedContent.content.split('\n\n').map((paragraph, index) => (
+                    <p key={index} className="mb-4 last:mb-0 text-slate-800 leading-relaxed">
+                      {paragraph}
+                    </p>
+                  ))}
+                </div>
+                
+                <div className="mt-6 pt-4 border-t border-slate-200">
+                  <p className="text-sm text-slate-500">
+                    This content was generated using Mark&apos;s personalized writing style guide, 
+                    incorporating authentic vulnerability, educational generosity, and cultural awareness.
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+          )}
+        </div>
 
         {/* Footer */}
-        <div className="text-center mt-8 text-gray-500">
-          <p>
+        <div className="text-center mt-12 pt-8 border-t border-slate-200">
+          <p className="text-sm text-slate-500">
             Powered by OpenAI GPT-4 • Style analysis by Mark Torres
           </p>
         </div>
