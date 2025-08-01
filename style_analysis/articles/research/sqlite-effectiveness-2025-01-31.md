@@ -1,108 +1,139 @@
-# The surprising effectiveness of SQLite for non-persistent use cases.
+# Style Analysis: "The surprising effectiveness of SQLite for non-persistent use cases"
 
-**Date:** 2025-01-30  
-**Category:** Research  
+**Article Date:** 2025-01-31  
+**Section:** Research  
+**Read Time:** 4 minutes  
 **URL:** https://markptorres.com/research/2025-01-31-effectiveness-of-sqlite
 
-## Full Article Content
+---
 
-I've been using SQLite as a buffer for some microservices that I'm building out. Normally I would've thought of using something like SQS or Kafka for something like this, but I'm trying to make this as low-cost as possible and I have to work within the constraints of bare-metal servers instead of using cloud services. Sometimes it feels like coding without an IDE, since I've had to build out so much from scratch, but it's also taught me a lot about how to create things from the ground up and not necessarily jump to or rely on off-the-shelf tools.
+## I. Key Evaluation Questions
 
-I had initially tried to manage my own caching and buffering system, but I kept encountering problems, especially around multiple processes concurrently writing as well as transaction integrity. As it turns out, SQLite has a good solution for this: single-writer ACID transactions. Why introduce the need for concurrency when the application doesn't need it?
+### 1. Dominant Rhetorical and Stylistic Patterns
+- **Technical narrative with personal experimentation**: Combines technical analysis with first-person experience
+- **Data-driven storytelling**: Uses performance metrics and tables to support claims
+- **Problem-solution structure**: Presents a challenge, explores solutions, shares results
+- **Iterative learning approach**: Shows multiple attempts and refinements
 
-I've been building out this system for using SQLite as these buffers, and have been pleasantly surprised by how well it's working. I've been using the following batching scheme:
+### 2. Clarity, Depth, and Persuasion Balance
+- **Clear technical explanations** with concrete examples
+- **Balanced depth**: Technical enough for engineers, accessible enough for general audience
+- **Persuasive through data**: Uses performance metrics to prove effectiveness
+- **Honest about limitations**: Acknowledges constraints and trade-offs
 
-- Grouping 1,000 records at a time into a single row
-- Writing 25 rows at a time to the database (could possibly tune this, though I've been happy with it so far).
-- Using WAL mode for the database.
+### 3. Recurring Tonal Tendencies
+- **Pragmatic and practical**: Focuses on real-world applicability
+- **Curious and experimental**: Shows willingness to try unconventional approaches
+- **Self-deprecating humor**: "Sometimes it feels like coding without an IDE"
+- **Optimistic but realistic**: Enthusiastic about results while acknowledging constraints
 
-For the dummy records, these only have fields {"uri": <uri>, "text": <text>} . I JSON-dump these into payload strings and create a composite record that looks something like:
+### 4. Reader Engagement Techniques
+- **Direct address**: "I'm curious to see how my thoughts on this will change over time"
+- **Rhetorical questions**: "But also, is it really a constraint?"
+- **Personal anecdotes**: Shares specific challenges and solutions
+- **Future-oriented thinking**: Ends with forward-looking perspective
 
-```
-{
-    "payload": "{'uri': <uri>, 'text': <text>}",
-    "timestamp": "<timestamp>",
-    "metadata": "{'service': <service>}"
-}
-```
+### 5. Consistent Weaknesses or Overused Devices
+- **Minimal weaknesses observed**: Writing is generally strong and varied
+- **Could use more analogies**: Technical concepts could benefit from more metaphors
+- **Some technical jargon**: Assumes reader familiarity with database concepts
 
-Using these settings, I've been getting the following performance (see testing script here, courtesy of Claude and Cursor).
+### 6. Emerging Persona/Voice
+- **Practical engineer**: Focuses on real-world solutions over theoretical perfection
+- **Experiential learner**: Values hands-on experimentation and iteration
+- **Cost-conscious**: Prioritizes efficiency and simplicity
+- **Independent thinker**: Questions conventional wisdom ("Just because it's 'something used at Facebook' doesn't mean it's good")
 
-Here are the results from writing 1,000 records per row, and 25 rows per transaction.
+### 7. Style Shifts Across Content
+- **Technical sections**: More formal, data-heavy
+- **Reflective sections**: More personal, philosophical
+- **Conclusion**: Broader perspective on tool selection and engineering philosophy
 
-| Records | Seconds | Records/Second | Final DB size (MB) |
-|---------|---------|----------------|-------------------|
-| 1,000 | 0 | 645,079 | 0.13 |
-| 10,000 | 0.1 | 1,213,910 | 1.26 |
-| 100,000 | 0.08 | 1,210,124 | 12.51 |
-| 1,000,000 | 0.96 | 1,015,605 | 125 |
-| 10,000,000 | 10.01 | 998,764 | 1,250 (1.25GB) |
-| 50,000,000 | 62.39 | 801,376 | 6,250 (6.25GB) |
-| 100,000,000 | 422.72 | 236,560 | 12,500.98 (12.5GB) |
+---
 
-Surprisingly, writing 100 rows at a time seemed to be faster for the 50M run but was faster for the rest? It seems like there's probably a sweet spot for how many records to write as part of the same transaction:
+## II. Benchmark Dimensions (1-5 Scale)
 
-| Records | Seconds | Records/Second | Final DB size (MB) |
-|---------|---------|----------------|-------------------|
-| 1,000 | 0 | 488505 | 0.13 |
-| 10,000 | 0.01 | 1,214,473 | 1.26 |
-| 100,000 | 0.08 | 1,224,832 | 12.51 |
-| 1,000,000 | 0.71 | 1,403,378 | 125.02 |
-| 10,000,000 | 7.68 | 1,302,649 | 1,250 (1.25GB) |
-| 50,000,000 | 92.54 | 540,315 | 6,250 (6.25GB) |
-| 100,000,000 | N/A | N/A | N/A |
+### 1. Clarity & Coherence: **5/5**
+- Excellent logical flow from problem to solution to results
+- Clear technical explanations with concrete examples
+- Well-structured with good transitions between sections
 
-I ran the job for 100M with 25 rows at a time locally and it worked fine (though my MacBook was humming weird at the end). I ran the job for 100M with 100 rows at a time on Slurm and, even after allocating 40GB of memory, it kept crashing with an OOM error. Oof.
+### 2. Voice & Personality: **4/5**
+- Strong, consistent voice as practical engineer
+- Personal touches without being overly casual
+- Shows personality through humor and self-reflection
 
-Writing 10 rows at a time seems strictly worse than the previous two:
+### 3. Sentence & Syntax Patterns: **4/5**
+- Varied sentence lengths (short punchy statements to longer technical explanations)
+- Good use of technical terminology balanced with accessible language
+- Effective use of lists and tables for data presentation
 
-| Records | Seconds | Records/Second | Final DB size (MB) |
-|---------|---------|----------------|-------------------|
-| 1,000 | 0.13 | 7,643 | 0.13 |
-| 10,000 | 0.12 | 81,117 | 1.26 |
-| 100,000 | 3.75 | 26,675 | 12.51 |
-| 1,000,000 | 20.18 | 49,555 | 125.02 |
-| 10,000,000 | 204.40 | 48,923 | 1,250 (1.25GB) |
-| 50,000,000 | N/A | N/A | N/A |
-| 100,000,000 | N/A | N/A | N/A |
+### 4. Tone & Emotional Resonance: **4/5**
+- Enthusiastic but measured about results
+- Honest about challenges and limitations
+- Optimistic about future possibilities
 
-I'm unsure to what degree writing 25 rows at a time is different from writing 100 rows at a time. In practice, I likely will be writing at most 1M records at a time anyways, though it's good to know how it would scale in the worst case.
+### 5. Persuasiveness & Argumentation: **5/5**
+- Strong evidence through performance data
+- Acknowledges counterarguments and limitations
+- Builds case through systematic testing and results
 
-Another observation was that it ended up taking my test script more time to generate dummy records than it did to write them to the database. This is something to consider as just having a large amount of records in memory is in itself a bottleneck, especially if you're not careful about memory management. I've been able to largely get around this by making my data pipelines operate in batches; this batch approach is also why creating a good buffering model is important, since I can detach the microservices from each other and separate out the data pipeline batching from the database writes.
+### 6. Use of Metaphor, Analogy & Storytelling: **3/5**
+- Limited use of metaphors ("coding without an IDE")
+- Could benefit from more analogies for technical concepts
+- Good narrative arc from problem to solution
 
-There's still the con of SQLite being single-writer. I've gotten around this by giving every service its own SQLite instance. This way, they can each scale separately. SQLite is pretty performant at scale across a variety of dimensions (see this link from the SQLite docs). Plus, SQLite is simple to implement, comes out-of-the-box with Python, requires no setup or server, and is easy to manage. I re-implemented some logic of the data pipelines to work around the single-writer constraint. But also, is it really a constraint? Or can I just simplify my problem to not make it harder than it needs to be? I also clear the DB whenever I get to writing the records to a more permanent storage (using .parquet and DuckDB, which is also a surprisingly great combination as well in its own right).
+### 7. Structural Style: **4/5**
+- Clear problem-solution-results structure
+- Effective use of data tables and code examples
+- Good balance of technical detail and reflection
 
-Overall, I'm pretty impressed by the scalability of SQLite and how flexible it can be used. Can't believe that this is something that comes out-of-the-box with very little if any setup. I think people sleep on tools like this in order to reach for the "latest and greatest" tools. Just because it's "something used at Facebook" doesn't mean it's good for your app with 20 users. I think there's a value in learning how to both build things from scratch and also really appreciate when different tools are right for the job. No need to reach for a self-hosted Postgres database or a Kubernetes cluster if you've not built anything of scale yet.
+### 8. Lexical Preferences: **4/5**
+- Technical but accessible vocabulary
+- Good balance of engineering terms and everyday language
+- Consistent use of first-person perspective
 
-I'm curious to see how my thoughts on this will change over time. The constraint of working on a high-performance bare-metal server has forced some creative engineering solutions, and I want to see how much I can push it before reaching to something like AWS.
+### 9. Reader Engagement Techniques: **4/5**
+- Direct questions and future-oriented thinking
+- Personal experience sharing
+- Invites reader to consider broader implications
 
-## Style Analysis
+### 10. Evolution Over Time: **N/A** (Single article analysis)
 
-### Writing Patterns Observed:
+---
 
-1. **Technical Depth with Accessibility**: Mark combines deep technical knowledge with clear, accessible explanations. He doesn't assume the reader knows everything but also doesn't oversimplify.
+## III. Output Fields Summary
 
-2. **Personal Experience Narrative**: Uses "I've been..." and "I had initially..." to frame technical content as personal learning journey.
+| Field | Description |
+|-------|-------------|
+| **Dominant Traits** | Technical narrative, data-driven storytelling, pragmatic problem-solving, experimental approach |
+| **Voice Description** | Practical engineer who values experimentation, efficiency, and real-world applicability over theoretical perfection |
+| **Stylistic Strengths** | Clear technical explanations, strong data presentation, honest about limitations, engaging personal voice |
+| **Common Weaknesses** | Could use more analogies, assumes some technical background, limited metaphor usage |
+| **Representative Excerpts** | "Sometimes it feels like coding without an IDE, since I've had to build out so much from scratch, but it's also taught me a lot about how to create things from the ground up" |
+| **Comparative Analogy** | This style is like a senior engineer's technical blog post meets a thoughtful lab notebook - practical, data-driven, but with personality |
+| **Actionable Feedback** | Consider adding more analogies for complex technical concepts; could expand on broader implications for engineering philosophy |
+| **Evolution Notes** | Shows mature technical writing with good balance of detail and accessibility |
 
-3. **Practical Problem-Solving Approach**: Starts with a real problem, explores solutions, and shares concrete results with data.
+---
 
-4. **Balanced Skepticism**: Questions conventional wisdom ("Why introduce the need for concurrency when the application doesn't need it?") while remaining open-minded.
+## Representative Excerpts
 
-5. **Data-Driven Conclusions**: Presents performance data in tables and uses it to draw conclusions rather than making assumptions.
+**Technical Clarity:**
+> "I've been using the following batching scheme: Grouping 1,000 records at a time into a single row, Writing 25 rows at a time to the database, Using WAL mode for the database."
 
-6. **Reflective Thinking**: Ends with philosophical questions about tool choices and future considerations.
+**Personal Voice:**
+> "Sometimes it feels like coding without an IDE, since I've had to build out so much from scratch, but it's also taught me a lot about how to create things from the ground up and not necessarily jump to or rely on off-the-shelf tools."
 
-7. **Casual Technical Tone**: Uses phrases like "Oof" and "Can't believe that this is something..." to maintain approachable tone despite technical depth.
+**Philosophical Reflection:**
+> "Just because it's 'something used at Facebook' doesn't mean it's good for your app with 20 users. I think there's a value in learning how to both build things from scratch and also really appreciate when different tools are right for the job."
 
-8. **Structured Information**: Uses clear headings, bullet points, and tables to organize complex information.
+---
 
-9. **Honest About Limitations**: Acknowledges what he doesn't know ("I'm unsure to what degree...") and areas for improvement.
+## Style Patterns Observed
 
-10. **Pragmatic Philosophy**: Emphasizes using the right tool for the job rather than following trends ("Just because it's 'something used at Facebook' doesn't mean it's good for your app with 20 users").
-
-### Voice Characteristics:
-- **Conversational yet precise**: Technical accuracy without being dry
-- **Self-deprecating humor**: "Oof" when things go wrong
-- **Curious and reflective**: Always thinking about implications and future directions
-- **Pragmatic**: Focuses on what works rather than what's trendy
-- **Educational**: Shares learnings and insights for others' benefit 
+1. **Technical + Personal**: Consistently combines technical analysis with personal experience
+2. **Data-Driven**: Uses concrete metrics and performance data to support claims
+3. **Iterative Thinking**: Shows multiple approaches and refinements
+4. **Pragmatic Philosophy**: Emphasizes practical solutions over theoretical perfection
+5. **Future-Oriented**: Ends with forward-looking perspective and curiosity 

@@ -2,11 +2,11 @@
 
 ## Research Section (18 articles)
 - [x] **The surprising effectiveness of SQLite for non-persistent use cases.** (2025-01-30) - ✅ COMPLETED
-- [ ] Why do we teach developers that serverless is always better? (2025-01-21)
+- [x] **Why do we teach developers that serverless is always better?** (2025-01-21) - ✅ COMPLETED
 - [ ] Research updates, 2024-06-01 (2024-06-01)
 - [ ] Research updates, 2024-05-31 (2024-05-31)
 - [ ] Research updates, 2024-05-30 (2024-05-30)
-- [ ] Accidentally deleting prod data (and the importance of backups) (2024-05-28)
+- [x] **Accidentally deleting prod data (and the importance of backups)** (2024-05-28) - ✅ COMPLETED
 - [ ] Experiments with LLM classification for political content (Part IX) (2024-05-21)
 - [ ] Experiments with LLM classification for political content (Part VIII) (2024-05-21)
 - [ ] Experiments with LLM classification for political content (Part VII) (2024-05-18)
@@ -17,7 +17,7 @@
 - [ ] Experiments with LLM classification for political content (Part II) (2024-05-01)
 - [x] **Experiments with LLM classification for political content (Part I)** (2024-04-30) - ✅ COMPLETED
 - [ ] Summary of "Algorithm-mediated social learning in online social networks" (2023-12-08)
-- [ ] Creating custom feeds in Bluesky: a data scientist's experience (2023-11-29)
+- [x] **Creating custom feeds in Bluesky: a data scientist's experience** (2023-11-29) - ✅ COMPLETED
 - [ ] Working with Bluesky as a researcher (2023-11-28)
 
 ## Self Education Section (8 articles)
@@ -26,9 +26,9 @@
 - [ ] Experimenting with LlamaIndex, Pt. I (2024-05-16)
 - [ ] LLMOps self-education, Pt. III (2024-05-15)
 - [ ] LLMOps self-education, Pt. II (2024-05-14)
-- [ ] LLMOps self-education, Pt. I (2024-05-14)
-- [ ] What I'm learning (2024-05-14) (2024-05-14)
-- [ ] What I'm learning (2024-05-09) (2024-05-09)
+- [x] **LLMOps self-education, Pt. I** (2024-05-14) - ✅ COMPLETED
+- [x] **What I'm learning (2024-05-14)** (2024-05-14) - ✅ COMPLETED
+- [x] **What I'm learning (2024-05-09)** (2024-05-09) - ✅ COMPLETED
 
 ## Personal Section (10 articles)
 - [ ] If you're going to do something, you might as well do it well (2025-01-21)
@@ -40,12 +40,12 @@
 - [ ] Why I'm not too worried about AI taking over the world (2024-05-17)
 - [ ] Riffs about higher education (2024-05-15)
 - [ ] Working at a brick-and-mortar business as a tech bro (2023-12-04)
-- [ ] 'Hello World!' (properly this time) (2023-10-03)
+- [x] **'Hello World!' (properly this time)** (2023-10-03) - ✅ COMPLETED
 
 ## Summary
 - **Total Articles:** 36
-- **Completed:** 2 (5.6%)
-- **Remaining:** 34 (94.4%)
+- **Completed:** 8 (22.2%)
+- **Remaining:** 28 (77.8%)
 
 ## Priority Articles for Analysis
 Based on content richness and style diversity, these articles should be prioritized:
