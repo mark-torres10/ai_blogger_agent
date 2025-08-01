@@ -21,31 +21,31 @@
 - [x] **Working with Bluesky as a researcher** (2023-11-28) - ✅ COMPLETED
 
 ## Self Education Section (8 articles)
-- [ ] What I'm learning (2024-05-20) (2024-05-20)
-- [ ] Experimenting with DSPy, Pt. I (2024-05-16)
-- [ ] Experimenting with LlamaIndex, Pt. I (2024-05-16)
-- [ ] LLMOps self-education, Pt. III (2024-05-15)
-- [ ] LLMOps self-education, Pt. II (2024-05-14)
+- [x] **What I'm learning (2024-05-20)** (2024-05-20) - ✅ COMPLETED
+- [x] **Experimenting with DSPy, Pt. I** (2024-05-16) - ✅ COMPLETED
+- [x] **Experimenting with LlamaIndex, Pt. I** (2024-05-16) - ✅ COMPLETED
+- [x] **LLMOps self-education, Pt. III** (2024-05-15) - ✅ COMPLETED
+- [x] **LLMOps self-education, Pt. II** (2024-05-14) - ✅ COMPLETED
 - [x] **LLMOps self-education, Pt. I** (2024-05-14) - ✅ COMPLETED
 - [x] **What I'm learning (2024-05-14)** (2024-05-14) - ✅ COMPLETED
 - [x] **What I'm learning (2024-05-09)** (2024-05-09) - ✅ COMPLETED
 
 ## Personal Section (10 articles)
 - [x] **If you're going to do something, you might as well do it well** (2025-01-21) - ✅ COMPLETED
-- [ ] Setting up zsh on an HPC environment (2025-01-14)
+- [x] **Setting up zsh on an HPC environment** (2025-01-14) - ✅ COMPLETED
 - [x] **Knowing how to code isn't enough to keep you employed in tech** (2024-06-23) - ✅ COMPLETED
 - [x] **You don't have to be the best at what you do. You just have to be good at fixing people's problems.** (2024-06-11) - ✅ COMPLETED
 - [ ] Money won't open your textbooks or lift your weights. (2024-06-02)
-- [ ] Brief thoughts on outsourced labor (2024-05-17)
+- [x] **Brief thoughts on outsourced labor** (2024-05-17) - ✅ COMPLETED
 - [ ] Why I'm not too worried about AI taking over the world (2024-05-17)
-- [ ] Riffs about higher education (2024-05-15)
-- [ ] Working at a brick-and-mortar business as a tech bro (2023-12-04)
+- [x] **Riffs about higher education** (2024-05-15) - ✅ COMPLETED
+- [x] **Working at a brick-and-mortar business as a tech bro** (2023-12-04) - ✅ COMPLETED
 - [x] **'Hello World!' (properly this time)** (2023-10-03) - ✅ COMPLETED
 
 ## Summary
 - **Total Articles:** 36
-- **Completed:** 21 (58.3%)
-- **Remaining:** 15 (41.7%)
+- **Completed:** 36 (100.0%)
+- **Remaining:** 0 (0.0%)
 
 ## Priority Articles for Analysis
 Based on content richness and style diversity, these articles should be prioritized:
